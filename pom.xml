@@ -21,6 +21,12 @@
     </build>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.1</version>
+        </dependency>
 <!--         Ваши зависимости-->
          <!-- https://mvnrepository.com/artifact/junit/junit -->
          <dependency>
@@ -30,11 +36,11 @@
              <scope>test</scope>
          </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.25</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>mysql</groupId>-->
+<!--            <artifactId>mysql-connector-java</artifactId>-->
+<!--            <version>8.0.25</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
