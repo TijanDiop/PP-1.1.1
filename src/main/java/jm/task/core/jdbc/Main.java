@@ -8,8 +8,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
-
         UserServiceImpl userService = new UserServiceImpl();
 
         userService.createUsersTable();
@@ -29,8 +27,8 @@ public class Main {
         userService.dropUsersTable();
 
         try {
-            Util.closeConnect();
-//            Util.closeSessionFactory();
+//            Util.closeConnect();
+            Util.closeSessionFactory();
             System.out.println("Соединение с БД закрыто.");
         } catch (Exception e) {
             System.out.println("Ошибка закрытия соединения с БД");

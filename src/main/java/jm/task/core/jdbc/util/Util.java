@@ -50,7 +50,7 @@ public class Util {
                 .setProperty("hibernate.connection.username", "postgres")
                 .setProperty("hibernate.connection.password", "admin")
                 .setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
-                .setProperty("hibernate.hbm2ddl.auto", "create")
+                .setProperty("hibernate.hbm2ddl.auto", "none")
 //                .setProperty("hibernate.show_sql", "true")
 //                .setProperty("hibernate.format_sql", "true")
                 .addAnnotatedClass(User.class);
