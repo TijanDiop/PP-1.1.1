@@ -10,9 +10,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Util {
-    private static final String URL_KEY = "db.url";
-    private static final String USER_NAME_KEY = "db.username";
-    private static final String PASSWORD_KEY = "db.password";
+    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "admin";
 
     private static Connection connection;
     private static SessionFactory factory;
@@ -20,15 +20,11 @@ public class Util {
     private Util() {
     }
 
-// JDBC подключение(Properties файл и класс PropertiesUtil используется только для подключения JDBC)
+// JDBC подключение
     public static Connection open() {
         if (connection == null) {
             try {
-                connection = DriverManager.getConnection(
-                        PropertiesUtil.get(URL_KEY),
-                        PropertiesUtil.get(USER_NAME_KEY),
-                        PropertiesUtil.get(PASSWORD_KEY)
-                );
+                connection = DriverManager.getConnection(URL,USER,PASSWORD);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -47,9 +43,9 @@ public class Util {
     private static void getFactory(){
         Configuration configuration = new Configuration()
                 .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
-                .setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres")
-                .setProperty("hibernate.connection.username", "postgres")
-                .setProperty("hibernate.connection.password", "admin")
+                .setProperty("hibernate.connection.url", URL)
+                .setProperty("hibernate.connection.username", USER)
+                .setProperty("hibernate.connection.password", PASSWORD)
                 .setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
                 .setProperty("hibernate.hbm2ddl.auto", "none")
 //                .setProperty("hibernate.show_sql", "true")
