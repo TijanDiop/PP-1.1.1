@@ -158,7 +158,4 @@ public class UserDaoHibernateImpl implements UserDao {
 
     }
 
-    public static void main(String[] args) {
-
-    }
 }
