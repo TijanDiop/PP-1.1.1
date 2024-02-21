@@ -20,6 +20,7 @@ public class Util {
     private Util() {
     }
 
+// JDBC подключение(Properties файл и класс PropertiesUtil используется только для подключения JDBC)
     public static Connection open() {
         if (connection == null) {
             try {
@@ -42,10 +43,10 @@ public class Util {
             throw new RuntimeException(e);
         }
     }
-
+// Hibernate подключение
     private static void getFactory(){
         Configuration configuration = new Configuration()
-//                .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
+                .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
                 .setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres")
                 .setProperty("hibernate.connection.username", "postgres")
                 .setProperty("hibernate.connection.password", "admin")

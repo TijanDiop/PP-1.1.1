@@ -17,11 +17,11 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void createUsersTable() {
         String sql = """
-                CREATE TABLE IF NOT EXISTS usertable(
-                id SERIAL PRIMARY KEY,
-                name TEXT NOT NULL,
-                lastName TEXT NOT NULL,
-                age INT NOT NULL)
+                CREATE TABLE IF NOT EXISTS Users(
+                    id BIGSERIAL PRIMARY KEY,
+                    name VARCHAR(128) NOT NULL,
+                    lastName VARCHAR(128) NOT NULL,
+                    age SMALLINT NOT NULL)
                 """;
 
         try (var statement = CONNECTION.createStatement()) {
@@ -36,7 +36,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void dropUsersTable() {
         String sql = """
-                DROP TABLE IF EXISTS usertable
+                DROP TABLE IF EXISTS Users
                 """;
         try (var statement = CONNECTION.createStatement()) {
             statement.execute(sql);
@@ -50,7 +50,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
         String sql = """
-                INSERT INTO usertable (name,lastname, age)
+                INSERT INTO Users (name,lastname, age)
                 VALUES (?,?,?)
                 """;
         try (var prepareStatement = CONNECTION.prepareStatement(sql)) {
@@ -69,7 +69,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void removeUserById(long id) {
         String sql = """
-                DELETE FROM usertable WHERE id = ?
+                DELETE FROM Users WHERE id = ?
                 """;
         try (var prepareStatement = CONNECTION.prepareStatement(sql)) {
             prepareStatement.setLong(1, id);
@@ -86,7 +86,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> tableUser = null;
         String sql = """
-                 SELECT id, name, lastname, age FROM usertable
+                 SELECT id, name, lastname, age FROM Users
                 """;
         try (var prepareStatement = CONNECTION.prepareStatement(sql)) {
             ResultSet resultSet = prepareStatement.executeQuery();
@@ -107,7 +107,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void cleanUsersTable() {
         String sql = """
-                TRUNCATE usertable RESTART IDENTITY
+                TRUNCATE Users RESTART IDENTITY
                 """;
         try (var statement = CONNECTION.createStatement()) {
             statement.execute(sql);

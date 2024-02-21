@@ -94,9 +94,12 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSession()) {
             transaction = session.beginTransaction();
 
-            Query query = session.createQuery("DELETE User WHERE id = :id");
-            int id1 = query.setParameter("id", id)
-                    .executeUpdate();
+            User user = session.get(User.class, id);
+            session.delete(user);
+
+//            Query query = session.createQuery("DELETE User WHERE id = :id");
+//            int id1 = query.setParameter("id", id)
+//                    .executeUpdate();
 
             transaction.commit();
 
@@ -120,7 +123,6 @@ public class UserDaoHibernateImpl implements UserDao {
 
             Query<User> fromUser = session.createQuery("FROM User ", User.class);
             list = fromUser.list();
-            list.forEach(System.out::println);
 
             transaction.commit();
 
@@ -153,6 +155,10 @@ public class UserDaoHibernateImpl implements UserDao {
                 e.printStackTrace();
             }
         }
+
+    }
+
+    public static void main(String[] args) {
 
     }
 }
